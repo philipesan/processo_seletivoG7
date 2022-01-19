@@ -1,0 +1,51 @@
+﻿@model ProcessoSeletivoG7.Models.ContatoModel
+
+@{
+    ViewBag.Title = "Contato";
+}
+
+<div class="m-2">
+    <h4 class="text-primary">
+        Cadastro de Contato
+    </h4>
+</div>
+<hr />
+@using (Html.BeginForm(FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <form class="m-2">
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    @Html.LabelFor(model => model.strNome, htmlAttributes: new { @class = "text-secundary" })
+                    @Html.TextBoxFor(model => model.strNome, htmlAttributes: new { @class = "form-control", placeholder = "ex: Jon Doe" })
+                    @Html.ValidationMessageFor(model => model.strNome, "", htmlAttributes: new { @class = "text-danger" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.strFuncao, htmlAttributes: new { @class = "text-secundary" })
+                    @Html.DropDownListFor(model => model.strFuncao, new SelectList(ViewBag.list), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.strFuncao, "", htmlAttributes: new { @class = "text-danger" })
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.strTelefone, htmlAttributes: new { @class = "text-secundary" })
+            @Html.TextBoxFor(model => model.strTelefone, htmlAttributes: new { @class = "form-control", data_js = "input", placeholder = "ex: (99) 9 9999-9999" })
+            @Html.ValidationMessageFor(model => model.strTelefone, "", htmlAttributes: new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.strEmail, htmlAttributes: new { @class = "text-secundary" })
+            @Html.TextBoxFor(model => model.strEmail, htmlAttributes: new { @class = "form-control", placeholder = "ex: Jon Doe" })
+            @Html.ValidationMessageFor(model => model.strEmail, "", htmlAttributes: new { @class = "text-danger" })
+
+        </div>
+        <button type="submit" value="Create" class="btn btn-primary">Enviar</button>
+    </form>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
